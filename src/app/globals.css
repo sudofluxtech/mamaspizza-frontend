@@ -1,0 +1,87 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-background: var(--background);
+  --font-bebas-neue: var(--font-bebas-neue);
+  --font-poppins: var(--font-poppins);
+  --color-custom-button-color: var(--custom-button-color);
+}
+
+:root {
+  --background: #fef7f0;
+  --custom-button-color: #f58220;
+}
+
+@layer base {
+  body {
+    @apply bg-background;
+    font-family: var(--font-poppins), system-ui, sans-serif;
+  }
+}
+
+
+.fade-top-mask {
+  -webkit-mask-image: linear-gradient(to top, rgb(255, 255, 255) 80%, transparent 100%);
+  mask-image: linear-gradient(to top, rgb(255, 255, 255) 95%, transparent 100%);
+}
+/* Container */
+.ah-container {
+  max-width: 1536px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+@media screen and (max-width: 1280px) {
+  .ah-container {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .ah-container {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .ah-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .ah-container {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media screen and (max-width: 475px) {
+  .ah-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .ah-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* Scrollbar Hide Utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
