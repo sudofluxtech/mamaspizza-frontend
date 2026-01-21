@@ -22,7 +22,7 @@ const AdminProfileCard: React.FC<AdminProfileCardProps> = ({
   imagePreview,
   onImageChange,
 }) => {
-  const displayImage = imagePreview || (profile.user_image ? `${process.env.NEXT_PUBLIC_API_URL}/public/${profile.user_image}` : null)
+  const displayImage = imagePreview || (profile.user_image ? profile.user_image : null)
 
   return (
     <div className="text-center">

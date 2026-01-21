@@ -60,7 +60,7 @@ const MenuOfferCards: React.FC<MenuOfferCardsProps> = ({
       {offer.thumbnail && (
         <div className="relative overflow-hidden">
           <Image
-            src={`${API_BASE_URL}/public/${offer.thumbnail}`}
+            src={offer.thumbnail || "/placeholder-avatar.svg"}
             alt={offer.title}
             width={320}
             height={160}

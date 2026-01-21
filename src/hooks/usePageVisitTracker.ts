@@ -51,7 +51,7 @@ export function usePageVisitTracker() {
         });
 
         if (response.ok) {
-          console.log('Page visit tracked:', pageVisitData);
+          // console.log('Page visit tracked:', pageVisitData);
         }
       } catch (error) {
         console.error('Failed to track page visit:', error);
@@ -79,7 +79,7 @@ export function usePageVisitTracker() {
         });
 
         if (response.ok) {
-          console.log('Page visit tracked:', pageVisitData);
+          // console.log('Page visit tracked:', pageVisitData);
         }
       } catch (error) {
         console.error('Failed to track page visit:', error);

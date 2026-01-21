@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { useCategories } from "@/hooks/category.hook";
 import { useMenus } from "@/hooks/menu.hook";
@@ -38,7 +38,9 @@ const Menu = () => {
   const { token, isAuthenticated } = useAuth();
   const { incrementItemCount } = useCartStore();
   const { guestId } = useGuest();
-  const { menus, loading: menuLoading, pagination } = useMenus({
+  
+  // Memoize params to prevent unnecessary re-renders and API calls
+  const menuParams = useMemo(() => ({
     category_id: categoryId,
     size_id: selectedSizeId ? parseInt(selectedSizeId) : undefined,
     per_page: perPage,
@@ -46,7 +48,9 @@ const Menu = () => {
     search: debouncedSearch,
     ordering: '-created_at',
     status: 1,
-  });
+  }), [categoryId, selectedSizeId, page, debouncedSearch]);
+  
+  const { menus, loading: menuLoading, pagination } = useMenus(menuParams);
 
 
   // --- Handlers ---

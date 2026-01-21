@@ -8,6 +8,9 @@
   --color-custom-button-color: var(--custom-button-color);
 }
 
+button{
+  cursor: pointer;
+}
 :root {
   --background: #fef7f0;
   --custom-button-color: #f58220;

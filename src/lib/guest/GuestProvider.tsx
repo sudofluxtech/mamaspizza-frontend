@@ -130,6 +130,9 @@ export const GuestProvider: React.FC<GuestProviderProps> = ({ children }) => {
       console.log("Guest session created successfully");
     } catch (error) {
       console.error("Failed to create guest session:", error);
+      // Mark as tracked even on error to prevent infinite retries
+      // The error might be temporary, but we don't want to spam the API
+      hasTrackedVisitor.current = true;
     } finally {
       isTrackingInProgress.current = false;
     }
@@ -137,10 +140,12 @@ export const GuestProvider: React.FC<GuestProviderProps> = ({ children }) => {
 
   // Track visitor when all data is available
   useEffect(() => {
-    if (guestData.guestId && device && browserType) {
+    // Only track if we haven't already tracked and all required data is available
+    if (guestData.guestId && device && browserType && !hasTrackedVisitor.current && !isTrackingInProgress.current) {
       trackVisitor();
     }
-  }, [trackVisitor, guestData.guestId, device, browserType]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [guestData.guestId, device, browserType]);
 
   const value: GuestContextType = {
     ...guestData,

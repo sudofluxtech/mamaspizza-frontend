@@ -178,7 +178,7 @@ export default function CartPage() {
           item.is_bogo_item && item.bogo_price
             ? parseFloat(item.bogo_price)
             : parseFloat(item.item.main_price),
-        image: `${process.env.NEXT_PUBLIC_API_URL}/public/${item.item.thumbnail}`,
+        image: `${item.item.thumbnail}`,
         qty: item.quantity,
         description: item.item.details,
         color: item.item.category.name,

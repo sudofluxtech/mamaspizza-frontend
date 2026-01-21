@@ -45,6 +45,7 @@ const ItemPage: React.FC = () => {
 
     // Hooks
     const { menus, loading, error, refetch } = useMenus();
+    console.log(selectedItem);
     const { deleteMenu, loading: deleteLoading } = useDeleteMenu();
 
     const filteredItems = menus.filter(item => {
@@ -262,7 +263,7 @@ const ItemPage: React.FC = () => {
                                                 <div className="w-10 h-10 rounded overflow-hidden mr-3 relative flex-shrink-0 bg-gray-100">
                                                     {item.thumbnail ? (
                                                         <Image
-                                                            src={`${process.env.NEXT_PUBLIC_API_URL}/public/${item.thumbnail}`}
+                                                            src={`${item.thumbnail}`}
                                                             alt={item.name}
                                                             width={40}
                                                             height={40}
@@ -443,7 +444,7 @@ const ItemPage: React.FC = () => {
                                 <div className="w-full h-32 rounded-lg overflow-hidden bg-gray-100">
                                     {selectedItem.thumbnail ? (
                                         <Image
-                                            src={`${process.env.NEXT_PUBLIC_API_URL}/public/${selectedItem.thumbnail}`}
+                                            src={`${selectedItem.thumbnail}`}
                                             alt={selectedItem.name}
                                             width={600}
                                             height={128}

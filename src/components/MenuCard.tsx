@@ -104,12 +104,7 @@ const MenuCard: React.FC<MenuCardProps> = ({
         <Image
           width={400}
           height={300}
-          src={
-            menu.thumbnail
-              ? `${process.env.NEXT_PUBLIC_API_URL}/public/${menu.thumbnail}`
-              : "/placeholder-avatar.svg"
-          }
-          // src={`${process.env.NEXT_PUBLIC_API_URL}/public/${menu.thumbnail}`}
+          src={menu.thumbnail || "/placeholder-avatar.svg"}
           alt={menu.name}
           className="w-full h-40 object-cover"
           onError={(e) => {

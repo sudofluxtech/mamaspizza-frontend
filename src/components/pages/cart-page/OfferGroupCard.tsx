@@ -111,7 +111,7 @@ const OfferGroupCard: React.FC<OfferGroupCardProps> = ({
                 {item.thumbnail && (
                   <div className="w-8 h-8 rounded-md overflow-hidden flex-shrink-0">
                     <Image
-                      src={`${process.env.NEXT_PUBLIC_API_URL}/public/${item.thumbnail}`}
+                      src={item.thumbnail || "/placeholder-avatar.svg"}
                       alt={item.name}
                       width={32}
                       height={32}
@@ -148,7 +148,7 @@ const OfferGroupCard: React.FC<OfferGroupCardProps> = ({
                 {item.thumbnail && (
                   <div className="w-8 h-8 rounded-md overflow-hidden flex-shrink-0">
                     <Image
-                      src={`${process.env.NEXT_PUBLIC_API_URL}/public/${item.thumbnail}`}
+                      src={item.thumbnail || "/placeholder-avatar.svg"}
                       alt={item.name}
                       width={32}
                       height={32}

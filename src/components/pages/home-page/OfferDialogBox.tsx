@@ -298,7 +298,7 @@ const OfferDialogBox: React.FC<OfferDialogBoxProps> = ({ offer, open, setOpen })
                           <div className="flex gap-3 p-3">
                             <div className="w-14 h-14 rounded-lg bg-gray-100 flex-shrink-0 overflow-hidden">
                               {menu.thumbnail ? (
-                                <Image width={56} height={56} src={`${process.env.NEXT_PUBLIC_API_URL}/public/${menu.thumbnail}`} alt={menu.name} className="w-full h-full object-cover" />
+                                <Image width={56} height={56} src={menu.thumbnail || "/placeholder-avatar.svg"} alt={menu.name} className="w-full h-full object-cover" />
                               ) : (
                                 <div className="w-full h-full flex items-center justify-center text-xs text-gray-400">No Image</div>
                               )}

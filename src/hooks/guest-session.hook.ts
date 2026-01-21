@@ -31,7 +31,7 @@ export function useCreateGuestSession() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const createGuestSession = async (sessionData: CreateGuestSessionData) => {
+  const createGuestSession = useCallback(async (sessionData: CreateGuestSessionData) => {
     setLoading(true);
     setError(null);
 
@@ -58,7 +58,7 @@ export function useCreateGuestSession() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   return {
     createGuestSession,

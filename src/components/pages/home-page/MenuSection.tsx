@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { useCategories } from "@/hooks/category.hook";
 import { useMenus } from "@/hooks/menu.hook";
@@ -73,10 +73,13 @@ const MenuSection: React.FC = () => {
     const selectedCategory = categories.find(cat => cat.name === activeTab);
     const categoryId = selectedCategory ? selectedCategory.id.toString() : undefined;
     
-    const { menus, loading: menuLoading } = useMenus({
+    // Memoize params to prevent unnecessary re-renders and API calls
+    const menuParams = useMemo(() => ({
         category_id: categoryId,
         per_page: 8, // Show 8 items on home page
-    });
+    }), [categoryId]);
+    
+    const { menus, loading: menuLoading } = useMenus(menuParams);
 
 
 
