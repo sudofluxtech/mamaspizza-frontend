@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useAuth } from "@/lib/stores/useAuth";
 import { ITEMS_API } from "@/app/api";
 
@@ -82,9 +82,6 @@ export function useMenus(params?: {
     prev_page_url: string | null;
   } | null>(null);
 
-  // Use ref to track previous params string to prevent unnecessary API calls
-  const prevParamsStringRef = useRef<string>('');
-
   const fetchMenus = useCallback(async (queryParams?: {
     category_id?: string;
     size_id?: number;
@@ -96,45 +93,36 @@ export function useMenus(params?: {
   }) => {
     // if (!token) return;
 
-    // Build query string first to check if params changed
-    const searchParams = new URLSearchParams();
-    if (queryParams?.category_id) {
-      searchParams.append('category_id', queryParams.category_id);
-    }
-    if (queryParams?.size_id) {
-      searchParams.append('size_id', queryParams.size_id.toString());
-    }
-    if (queryParams?.per_page) {
-      searchParams.append('per_page', queryParams.per_page.toString());
-    }
-    if (queryParams?.page) {
-      searchParams.append('page', queryParams.page.toString());
-    }
-    if (queryParams?.search) {
-      searchParams.append('search', queryParams.search);
-    }
-    if (queryParams?.ordering) {
-      searchParams.append('ordering', queryParams.ordering);
-    }
-    if (queryParams?.status !== undefined) {
-      searchParams.append('status', queryParams.status.toString());
-    }
-    
-    const queryString = searchParams.toString();
-    
-    // Check if params have actually changed - skip API call if same
-    if (prevParamsStringRef.current === queryString) {
-      return;
-    }
-    
-    // Update ref with new params string
-    prevParamsStringRef.current = queryString;
-
     setLoading(true);
     setError(null);
 
     try {
-      const url = `${ITEMS_API}${queryString ? `?${queryString}` : ''}`;
+      // Build query string
+      const searchParams = new URLSearchParams();
+      if (queryParams?.category_id) {
+        searchParams.append('category_id', queryParams.category_id);
+      }
+      if (queryParams?.size_id) {
+        searchParams.append('size_id', queryParams.size_id.toString());
+      }
+      if (queryParams?.per_page) {
+        searchParams.append('per_page', queryParams.per_page.toString());
+      }
+      if (queryParams?.page) {
+        searchParams.append('page', queryParams.page.toString());
+      }
+      if (queryParams?.search) {
+        searchParams.append('search', queryParams.search);
+      }
+      if (queryParams?.ordering) {
+        searchParams.append('ordering', queryParams.ordering);
+      }
+      if (queryParams?.status !== undefined) {
+        searchParams.append('status', queryParams.status.toString());
+      }
+      
+      const queryString = searchParams.toString();
+        const url = `${ITEMS_API}${queryString ? `?${queryString}` : ''}`;
       
       const response = await fetch(url, {
         headers: {
