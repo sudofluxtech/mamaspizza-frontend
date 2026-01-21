@@ -189,37 +189,56 @@ const AdminSidebar: React.FC = () => {
 
         return (
             <div key={item.href}>
-                <div
-                    className={`group relative flex items-center justify-between px-3 py-2.5 mx-2 rounded-xl transition-all duration-200 cursor-pointer ${
-                        active
-                            ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg shadow-orange-500/25'
-                            : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                    } ${level > 0 ? 'ml-6' : ''}`}
-                    onClick={() => hasChildren ? toggleExpanded(item.href) : undefined}
-                >
-                    <Link 
-                        href={item.href} 
-                        className="flex items-center gap-3 flex-1 min-w-0"
-                        onClick={(e) => hasChildren ? e.preventDefault() : undefined}
+                {hasChildren ? (
+                    // For items with children, use a button instead of Link to prevent navigation
+                    <button
+                        className={`group relative flex items-center justify-between px-3 py-2.5 mx-2 rounded-xl transition-all duration-200 cursor-pointer w-full ${
+                            active
+                                ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg shadow-orange-500/25'
+                                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                        } ${level > 0 ? 'ml-6' : ''}`}
+                        onClick={() => toggleExpanded(item.href)}
                     >
-                        <div className={`flex-shrink-0 w-5 h-5 flex items-center justify-center ${
-                            active ? 'text-white' : 'text-gray-500 group-hover:text-gray-700'
-                        }`}>
-                            <item.icon size={18} />
+                        <div className="flex items-center gap-3 flex-1 min-w-0">
+                            <div className={`flex-shrink-0 w-5 h-5 flex items-center justify-center ${
+                                active ? 'text-white' : 'text-gray-500 group-hover:text-gray-700'
+                            }`}>
+                                <item.icon size={18} />
+                            </div>
+                            {!isCollapsed && (
+                                <span className="font-medium text-sm truncate">{item.title}</span>
+                            )}
                         </div>
                         {!isCollapsed && (
-                            <span className="font-medium text-sm truncate">{item.title}</span>
+                            <div className={`flex-shrink-0 transition-transform duration-200 ${
+                                isExpanded ? 'rotate-180' : ''
+                            }`}>
+                                <ChevronDown size={16} className="text-gray-400" />
+                            </div>
                         )}
-                    </Link>
-                    
-                    {hasChildren && !isCollapsed && (
-                        <div className={`flex-shrink-0 transition-transform duration-200 ${
-                            isExpanded ? 'rotate-180' : ''
-                        }`}>
-                            <ChevronDown size={16} className="text-gray-400" />
+                    </button>
+                ) : (
+                    // For items without children, use Link for navigation
+                    <Link 
+                        href={item.href} 
+                        className={`group relative flex items-center justify-between px-3 py-2.5 mx-2 rounded-xl transition-all duration-200 cursor-pointer ${
+                            active
+                                ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg shadow-orange-500/25'
+                                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                        } ${level > 0 ? 'ml-6' : ''}`}
+                    >
+                        <div className="flex items-center gap-3 flex-1 min-w-0">
+                            <div className={`flex-shrink-0 w-5 h-5 flex items-center justify-center ${
+                                active ? 'text-white' : 'text-gray-500 group-hover:text-gray-700'
+                            }`}>
+                                <item.icon size={18} />
+                            </div>
+                            {!isCollapsed && (
+                                <span className="font-medium text-sm truncate">{item.title}</span>
+                            )}
                         </div>
-                    )}
-                </div>
+                    </Link>
+                )}
 
                 {/* Children items */}
                 {hasChildren && isExpanded && !isCollapsed && isClient && (
