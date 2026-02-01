@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import {
-  Phone,
   Mail,
   MapPin,
   Facebook,
@@ -55,7 +54,7 @@ export default function Footer() {
                 <Logo />
               </div>
               <p className="mt-4 text-sm md:text-base">
-                <strong>Mama's Pizza</strong> is your go-to destination for
+                <strong>Mama&apos;s Pizza</strong> is your go-to destination for
                 authentic Italian pizza in London. We specialize in{" "}
                 <strong>fresh, hand-tossed pizzas</strong> made with premium
                 ingredients and traditional recipes, delivering across{" "}
@@ -160,14 +159,16 @@ export default function Footer() {
             className="text-3xl sm:text-4xl md:text-5xl lg:text-[70px] xl:text-[100px] 2xl:text-[140px] font-bold text-orange-50 tracking-tight break-words px-2"
             style={{ fontFamily: "serif" }}
           >
-            MAMA'S PIZZA
+            MAMA&apos;S PIZZA
           </p>
         </div>
 
         {/* Bottom Section - Copyright & Developer Credit */}
         <div className="border-t border-orange-500/30 py-4 md:py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4 text-xs sm:text-sm text-orange-50 text-center md:text-left">
-            <div className="wrap-break-word">{year} © MAMA'S PIZZA LONDON</div>
+            <div className="wrap-break-word">
+              {year} © MAMA&apos;S PIZZA LONDON
+            </div>
             <Link
               target="_blank"
               href="https://sudoflux.com/"
